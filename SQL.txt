@@ -1,0 +1,50 @@
+ -- 博主表
+create table if not exists t_blogger(
+id int(11) auto_increment not null PRIMARY KEY  COMMENT '主键',
+userName varchar(50) UNIQUE COMMENT '登录名',
+password varchar(100) not null COMMENT '密码',
+profile text COMMENT '个人信息',
+nickName varchar(50) not null COMMENT '昵称',
+sign varchar(100) not null comment  '个性签名',
+imageName varchar(100) not null COMMENT '头像地址'
+);
+
+ -- 博主类型表
+create table if not exists t_blogtype(
+id int(11) auto_increment not null PRIMARY KEY  COMMENT '主键',
+typeName varchar(100) COMMENT '类型名',
+orderNo int(11) COMMENT '序号'
+) comment '博主类型表';
+
+
+-- 博客表
+create table if not exists t_blog(
+id int(11) auto_increment not null PRIMARY KEY  COMMENT '主键',
+title varchar(200)  COMMENT '标题',
+summary varchar(400) COMMENT '摘要',
+releaseDate datetime  COMMENT '发表时间',
+clickHit int(11)  COMMENT '点击数',
+replyHit int(11)  comment  '评论数',
+content text  COMMENT '内容',
+typeId int(11) comment '所属博客类型',
+keyWord varchar(200) COMMENT '关键字'
+) comment '博客表' ;
+
+-- 评论表
+create table if not exists t_comment(
+id int(11) auto_increment not null primary key COMMENT '主键',
+userIp varchar(50)  COMMENT '标题',
+blogId int(11) comment '评论者IP',
+content varchar(1000) COMMENT '评论内容',
+commentDate datetime  COMMENT '评论时间',
+state int(11)  comment  '0未审核，1审核通过，2审核未通过'
+) comment '评论表';
+
+
+-- 友情链接
+create table if not exists t_link(
+id int(11) auto_increment not null primary key COMMENT '主键',
+linkName varchar(100)  COMMENT '网站名称',
+linkUrl varchar(500) COMMENT '网站地址',
+orderNo int(11)  COMMENT '序号'
+) comment '友情链接';

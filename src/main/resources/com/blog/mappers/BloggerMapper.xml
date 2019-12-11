@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.dao.BloggerDao">
+    <resultMap id="BloggerResult" type="Blogger">
+        <result property="id" column="id"></result>
+        <result property="userName" column="userName"></result>
+        <result property="password" column="password"></result>
+        <result property="nickName" column="nickName"></result>
+        <result property="profile" column="profile"></result>
+        <result property="imageName" column="imageName"></result>
+    </resultMap>
+    <select id="getByUserName" parameterType="String" resultMap="BloggerResult">
+        select * from t_blogger where userName=#{userName}
+    </select>
+
+    <update id="update" parameterType="Blogger">
+        update t_blogger
+        <set>
+            <if test="password!=null and password!=''">
+                password=#{password},
+            </if>
+            <if test="nickName!=null and nickName!=''">
+                nickName=#{nickName},
+            </if>
+            <if test="sign!=null and sign!=''">
+                sign=#{sign},
+            </if>
+            <if test="profile!=null and profile!=''">
+                profile=#{profile},
+            </if>
+            <if test="imageName!=null and imageName!=''">
+                imageName=#{imageName},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+
+    <select id="find" resultMap="BloggerResult">
+        select * from t_blogger limit 1
+    </select>
+
+</mapper>
